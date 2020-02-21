@@ -1,8 +1,9 @@
 <template>
   <div>
-    <label v-if="label">{{label}}</label>
+    <label v-if="label"  :class="{ 'i-form-item-label-required': isRequired }">{{label}}</label>
     <div>
       <slot></slot>
+       <div v-if="validateState === 'error'" class="i-form-item-message">{{ validateMessage }}</div>
     </div>
   </div>
 </template>
@@ -26,6 +27,7 @@ export default {
   },
   data () {
     return {
+      isRequired: false, // 是否为必填
       validateState: '', // 校驗狀態
       validateMessage: '' // 校驗不通過時的提示信息
     }
@@ -38,6 +40,8 @@ export default {
   mounted () {
     if (this.prop) {
       this.dispatch('iForm', 'on-form-item-add', this)
+      // 设置初始值，以便在重置时恢复默认值
+      this.initialValue = this.fieldValue
       this.setRules()
     }
   },
@@ -86,11 +90,22 @@ export default {
     },
     onFieldChange () {
       this.validate('change')
+    },
+    resetField () {
+      this.validateState = ''
+      this.validateMessage = ''
+      this.form.model[this.prop] = this.initialValue
     }
   }
 }
 </script>
 
 <style>
-
+  .i-form-item-label-required:before {
+    content: '*';
+    color: red;
+  }
+  .i-form-item-message {
+    color: red;
+  }
 </style>
