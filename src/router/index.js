@@ -7,6 +7,10 @@ const routes = [
   {
     path: '/form',
     component: () => import('../views/form.vue')
+  },
+  {
+    path: '/message',
+    component: () => import('../views/message.vue')
   }
 ]
 

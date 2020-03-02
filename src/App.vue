@@ -2,6 +2,7 @@
   <div id="app">
     <div id="nav">
       <router-link to="/form">Form</router-link>
+      <router-link to="/message">Message</router-link>
     </div>
     <router-view/>
   </div>
@@ -23,6 +24,7 @@
 #nav a {
   font-weight: bold;
   color: #2c3e50;
+  margin: 0 5px;
 }
 
 #nav a.router-link-exact-active {
