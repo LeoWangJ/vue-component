@@ -1,6 +1,9 @@
 <template>
   <transition>
-    <div class="leo-message">
+    <div :class="[
+      `leo-message`,
+      `leo-message--${type}`
+      ]" >
       <p>{{message}}</p>
     </div>
   </transition>
@@ -11,7 +14,8 @@ export default {
   data () {
     return {
       message: 'test',
-      duration: 3000
+      duration: 3000,
+      type: 'error'
     }
   },
   mounted () {
@@ -41,6 +45,12 @@ export default {
       font-size: 18px;
       border-radius: 4px;
       background: rgba(17, 17, 17, 0.7);
+    }
+    &--success p{
+      background: rgba(0, 255, 0, 0.5);
+    }
+    &--error p{
+      background: rgba(255, 0, 0, 0.5);
     }
   }
 </style>

@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import main from './main.vue'
 const MainContructor = Vue.extend(main)
-const message = function (options = {}) {
+const Message = function (options = {}) {
   if (typeof options === 'string') {
     options = {
       message: options
@@ -13,6 +13,13 @@ const message = function (options = {}) {
   }).$mount()
   console.log(instance)
   document.body.appendChild(instance.$el)
-}
+};
 
-export default message
+['success', 'error'].forEach((type) => {
+  Message[type] = options => {
+    options.type = type
+    return Message(options)
+  }
+})
+
+export default Message
