@@ -13,9 +13,9 @@ export default {
   },
   methods: {
     handleMessage () {
-      console.log(this)
       this.$message({
-        message: '有成功嗎？'
+        message: '有成功嗎？',
+        duration: 300
       })
     }
   }
